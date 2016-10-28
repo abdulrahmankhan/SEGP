@@ -1,2 +1,1 @@
 # SEGP
-this is bullshit
