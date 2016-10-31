@@ -24,10 +24,10 @@ namespace SEGP
         }
    
         int UOB1;
-        String SStatus = null;
+        String SStatus ;
         int alloc;
         int PID;
-        String PStatus = null;
+        String PStatus  ;
         MySqlDataReader reader = null;
         public List<Student1> connect()
         {
@@ -81,12 +81,12 @@ namespace SEGP
 
             int counter = 0;
 
+            try {
             foreach (PAT p in pat_list)
             {
                 int ID = p.ID;
                 int alloc = p.allocations;
                 String status = p.status;
-                try {
                     if (status.Equals("Full") && alloc < 8 && counter < st_list.Count)
                     {
                         for (int i = alloc; i <= 8 && i <= st_list.Count; i++)
@@ -143,6 +143,7 @@ namespace SEGP
                         }
                     }
                 }
+            }
                 catch(Exception e)
                 {
                     MessageBox.Show("Error:"+e);
@@ -151,45 +152,91 @@ namespace SEGP
                 {
                     MessageBox.Show("Data is up to date!");
                 }
-            }
             myConnection.Close();
         }
 
 
         public void manual()
         {
-            myConnection.Open();
-            MySqlCommand command = new MySqlCommand();
-            command = myConnection.CreateCommand();
-            try {
-                Console.WriteLine(PStatus);
-                if (((PStatus.Equals("Partial") && alloc < 4) || (PStatus.Equals("Full") && alloc < 8)) && SStatus.Equals("Not Assigned"))
+            if (dataGridView1.SelectedRows != null && dataGridView2.SelectedRows!=null)
+            {
+
+                myConnection.Open();
+                MySqlCommand command = new MySqlCommand();
+                command = myConnection.CreateCommand();
+                try
                 {
+                    Console.WriteLine(PStatus);
+                    if (((PStatus.Equals("Partial") && alloc < 4) || (PStatus.Equals("Full") && alloc < 8)) && SStatus.Equals("Not Assigned"))
+                    {
 
-                    String s = "insert into allocations values(" + PID + "," + UOB1 + ")";
-                    command.CommandText = s;
-                    command.ExecuteNonQuery();
-                    String s1 = "Update students set status ='Assigned' where uob=" + UOB1;
-                    command.CommandText = s1;
-                    command.ExecuteNonQuery();
-                    String s2 = "Update pat set Allocations = " + (alloc + 1) + " where ID = " + PID;
-                    command.CommandText = s2;
-                    command.ExecuteNonQuery();
-                    myConnection.Close();
-                    connect();
+                        String s = "insert into allocations values(" + PID + "," + UOB1 + ")";
+                        command.CommandText = s;
+                        command.ExecuteNonQuery();
+                        String s1 = "Update students set status ='Assigned' where uob=" + UOB1;
+                        command.CommandText = s1;
+                        command.ExecuteNonQuery();
+                        String s2 = "Update pat set Allocations = " + (alloc + 1) + " where ID = " + PID;
+                        command.CommandText = s2;
+                        command.ExecuteNonQuery();
+                        myConnection.Close();
+                        connect();
 
 
+                    }
+                    else if (((PStatus.Equals("Partial") && alloc < 4) || (PStatus.Equals("Full") && alloc < 8)) && SStatus.Equals("Assigned"))
+                    {
+                        var result = MessageBox.Show("Are you sure you want re-assign this student","Confirm Yes",MessageBoxButtons.YesNo);
+                        if(result == DialogResult.Yes)
+                        {
+                            try {
+                                command.CommandText = "select PAT_ID from allocations where UOB='" + UOB1 + "'";
+                                int oid = Convert.ToInt32(command.ExecuteScalar().ToString());
+
+                                command.CommandText = "select Name from pat where ID='" + oid + "'";
+                                String opat = command.ExecuteScalar().ToString();
+
+                                command.CommandText = "select Name from students where UOB='" + UOB1 + "'";
+                                String student = command.ExecuteScalar().ToString();
+
+                                command.CommandText = "select Name from pat where ID='" + PID + "'";
+                                String npat = command.ExecuteScalar().ToString();
+
+                                String sms = "Request has been recieved to change the PAT of "+student +" UOB: "+UOB1+" to "+npat+" from "+opat;
+
+                                MailClass mail = new MailClass("rahman2013@namal.edu.pk",sms);
+
+                                command.CommandText = "insert into request values('" + UOB1 + "','" + student + "','" + PID + "','" + npat + "','" + oid + "','" + opat + "')";
+                                command.ExecuteNonQuery();
+
+                            }
+                            catch(Exception a)
+                            {
+                                MessageBox.Show("Error:"+a);
+                            }
+
+                        }
+
+                    }
+                    else if (((PStatus.Equals("Partial") && alloc == 4) || (PStatus.Equals("Full") && alloc == 8)) && SStatus.Equals("Assigned"))
+                    {
+                        MessageBox.Show("You can't assign Student to this PAT, because allocations to this PAT is already complete.");
+                    }
+                    else
+                    {
+                        MessageBox.Show("select student and pat to assign");
+                    }
                 }
-                else
+                catch (Exception e)
                 {
                     MessageBox.Show("select student and pat to assign");
                 }
+                myConnection.Close();
             }
-            catch(Exception e)
+            else
             {
-                MessageBox.Show("Error:"+e);
+                MessageBox.Show("select student and pat to assign");
             }
-            myConnection.Close();
         }
      
 
@@ -266,6 +313,8 @@ namespace SEGP
 
         private void Allocations_Load(object sender, EventArgs e)
         {
+            this.BackColor = System.Drawing.Color.PaleGreen;
+            addData();
             connect();
             refresh1();
         }
@@ -290,24 +339,69 @@ namespace SEGP
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            try {
 
-            int r = e.RowIndex;
-            UOB1 = Convert.ToInt32(dataGridView1.Rows[r].Cells[0].Value);
-            this.SStatus = dataGridView1.Rows[r].Cells[2].Value.ToString();
-            Console.WriteLine("hello");
-
+                int r = e.RowIndex;
+                UOB1 = Convert.ToInt32(dataGridView1.Rows[r].Cells[0].Value);
+                SStatus = dataGridView1.Rows[r].Cells[2].Value.ToString();
+                Console.WriteLine("hello" + SStatus);
+            }
+            catch(Exception a)
+            {
+                
+            }
         }
         
         private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            int r = e.RowIndex;
-            PID = Convert.ToInt32(dataGridView2.Rows[r].Cells[0].Value);
-            this.PStatus = dataGridView2.Rows[r].Cells[2].Value.ToString();
-            alloc = Convert.ToInt32(dataGridView2.Rows[r].Cells[3].Value.ToString());
+            try {
+                int r = e.RowIndex;
+                PID = Convert.ToInt32(dataGridView2.Rows[r].Cells[0].Value);
+                PStatus = dataGridView2.Rows[r].Cells[2].Value.ToString();
+                alloc = Convert.ToInt32(dataGridView2.Rows[r].Cells[3].Value.ToString());
 
-            Console.WriteLine(PStatus );
+                Console.WriteLine("Hello" + PStatus);
+            }
+            catch
+            {
+
+            }
+        }
+
+        public void addData()
+        {
+            try
+            {
+                MySqlDataAdapter dataadapter = new MySqlDataAdapter("select * from request", myConnection);
+
+                DataTable table = new DataTable();
+                table.Locale = System.Globalization.CultureInfo.InvariantCulture;
+                dataadapter.Fill(table);
+                BindingSource bindingSource1 = new BindingSource();
+                bindingSource1.DataSource = table;
+                dataGridView3.DataSource = bindingSource1;
+            }
+            catch (Exception a)
+            {
+                MessageBox.Show("Something is Wrong" + a.ToString());
+            }
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try {
+                int r = e.RowIndex;
+                UOB1 = Convert.ToInt32(dataGridView1.Rows[r].Cells[0].Value);
+                SStatus = dataGridView1.Rows[r].Cells[2].Value.ToString();
+                Console.WriteLine("hello" + SStatus);
+            }
+            catch
+            {
+
+            }
         }
     }
+
 
     public class Student1
     {

@@ -19,7 +19,7 @@ namespace SEGP
             InitializeComponent();
         }
 
-        private void Teachers_Load(object sender, EventArgs e)
+        public void reload()
         {
             try
             {
@@ -36,18 +36,29 @@ namespace SEGP
             {
                 MessageBox.Show("Something is Wrong" + a.ToString());
             }
+
+        }
+        private void Teachers_Load(object sender, EventArgs e)
+        {
+            reload();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            DevExpress.XtraGrid.Views.Grid.GridView view = gridControl1.MainView as DevExpress.XtraGrid.Views.Grid.GridView;
-            if (view != null)
+            try {
+                DevExpress.XtraGrid.Views.Grid.GridView view = gridControl1.MainView as DevExpress.XtraGrid.Views.Grid.GridView;
+                if (view != null)
+                {
+                    view.ExportToPdf("Teacher.pdf");
+                    Process pdf = new Process();
+                    pdf.StartInfo.FileName = "FoxitReader.exe";
+                    pdf.StartInfo.Arguments = "Teacher.pdf";
+                    pdf.Start();
+                }
+            }
+            catch (Exception a)
             {
-                view.ExportToPdf("Teacher.pdf");
-                Process pdf = new Process();
-                pdf.StartInfo.FileName = "FoxitReader.exe";
-                pdf.StartInfo.Arguments = "Teacher.pdf";
-                pdf.Start();
+                MessageBox.Show("Error: " + a);
             }
 
         }

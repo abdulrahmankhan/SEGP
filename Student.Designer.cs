@@ -54,12 +54,13 @@
             // 
             // button1
             // 
+            this.button1.BackColor = System.Drawing.Color.White;
             this.button1.Location = new System.Drawing.Point(873, 463);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(102, 23);
             this.button1.TabIndex = 1;
             this.button1.Text = "Download PDF";
-            this.button1.UseVisualStyleBackColor = true;
+            this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // label2
@@ -73,12 +74,13 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(741, 463);
+            this.button2.BackColor = System.Drawing.Color.White;
+            this.button2.Location = new System.Drawing.Point(780, 463);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.Size = new System.Drawing.Size(87, 23);
             this.button2.TabIndex = 7;
-            this.button2.Text = "Save";
-            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Text = "Save Data";
+            this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // Student

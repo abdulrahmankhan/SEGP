@@ -32,9 +32,9 @@ namespace SEGP
                     sda.SelectCommand.ExecuteNonQuery();
                     MessageBox.Show("Data hes been saved!");
                 }
-                catch
+                catch(Exception a)
                 {
-                    MessageBox.Show("Error occured: Inserting to databse has been canceled! ");
+                    MessageBox.Show("Error occured:  "+a);
                 }
             }
             else
@@ -65,9 +65,9 @@ namespace SEGP
                     sda.SelectCommand.ExecuteNonQuery();
                     MessageBox.Show("Data hes been saved!");
                 }
-                catch
+                catch(Exception a)
                 {
-                    MessageBox.Show("Error occured: Inserting to databse has been canceled! ");
+                    MessageBox.Show("Error occured: "+a);
                 }
 
             }
@@ -137,6 +137,18 @@ namespace SEGP
 
 
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            DialogResult op = openFileDialog1.ShowDialog();
+            if (op == DialogResult.OK)
+            {
+
+                updateExcel(openFileDialog1.FileName, 1);
+            }
+        }
+
+  
     }
 
        

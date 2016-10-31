@@ -12,12 +12,13 @@ namespace SEGP
  
         private void button2_Click(object sender, EventArgs e)
         {
-
-            this.Controls.Remove(allocations1);
-            this.Controls.Remove(teachers1);
-            this.Controls.Remove(home1);
-            this.Controls.Remove(add_New1);
-            this.Controls.Add(student1);
+            allocations1.connect();
+            Controls.Remove(allocations1);
+            Controls.Remove(teachers1);
+            Controls.Remove(home1);
+            Controls.Remove(add_New1);
+            new Student().reload();
+            Controls.Add(student1);
             
 
 
@@ -25,52 +26,64 @@ namespace SEGP
 
         private void button3_Click(object sender, EventArgs e)
         {
-            this.Controls.Remove(student1);
-            this.Controls.Remove(home1);
-            this.Controls.Remove(teachers1);
-            this.Controls.Remove(add_New1);
-            this.Controls.Add(allocations1);
+            Controls.Remove(student1);
+            Controls.Remove(home1);
+            Controls.Remove(teachers1);
+            Controls.Remove(add_New1);
+            Controls.Add(allocations1);
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            this.Controls.Remove(student1);
-            this.Controls.Remove(allocations1);
-            this.Controls.Remove(home1);
-            this.Controls.Remove(add_New1);
-            this.Controls.Add(teachers1);
+            allocations1.connect();
+            Controls.Remove(student1);
+            Controls.Remove(allocations1);
+            Controls.Remove(home1);
+            Controls.Remove(add_New1);
+            new Teachers().reload();
+            Controls.Add(teachers1);
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            this.Controls.Remove(student1);
-            this.Controls.Remove(allocations1);
-            this.Controls.Remove(teachers1);
-            this.Controls.Remove(add_New1);
-            this.Controls.Add(home1);
+            allocations1.connect();
+            Controls.Remove(student1);
+            Controls.Remove(allocations1);
+            Controls.Remove(teachers1);
+            Controls.Remove(add_New1);
+            Controls.Add(home1);
             home1.SetBounds(37, 58, 1001, 489);
         }
 
         private void Main_Load_1(object sender, EventArgs e)
         {
             home1.SetBounds(37, 58, 1001, 489);
-            this.Controls.Remove(student1);
-            this.Controls.Remove(allocations1);
-            this.Controls.Remove(teachers1);
-            this.Controls.Add(home1);
-            this.Controls.Remove(add_New1);
+            Controls.Remove(student1);
+            Controls.Remove(allocations1);
+            Controls.Remove(teachers1);
+            Controls.Add(home1);
+            Controls.Remove(add_New1);
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            this.Controls.Remove(student1);
-            this.Controls.Remove(allocations1);
-            this.Controls.Remove(teachers1);
-            this.Controls.Remove(home1);
-            this.Controls.Add(add_New1);
+            Controls.Remove(student1);
+            Controls.Remove(allocations1);
+            Controls.Remove(teachers1);
+            Controls.Remove(home1);
+            Controls.Add(add_New1);
 
         }
 
-         
+        private void add_New1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            this.Hide();
+            new Login().Show();
+        }
     }
 }

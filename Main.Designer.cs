@@ -521,6 +521,7 @@
             this.errorListDockPanel1_Container = new DevExpress.XtraReports.UserDesigner.DesignControlContainer();
             this.groupAndSortDockPanel1 = new DevExpress.XtraReports.UserDesigner.GroupAndSortDockPanel();
             this.groupAndSortDockPanel1_Container = new DevExpress.XtraReports.UserDesigner.DesignControlContainer();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemZoomTrackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemProgressBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.designRepositoryItemComboBox1)).BeginInit();
@@ -542,60 +543,72 @@
             // 
             // button1
             // 
+            this.button1.BackColor = System.Drawing.Color.Ivory;
+            this.button1.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.Location = new System.Drawing.Point(37, 27);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 25);
+            this.button1.Size = new System.Drawing.Size(75, 27);
             this.button1.TabIndex = 2;
             this.button1.Text = "Home";
-            this.button1.UseVisualStyleBackColor = true;
+            this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
             // 
+            this.button2.BackColor = System.Drawing.Color.Ivory;
+            this.button2.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button2.Location = new System.Drawing.Point(108, 27);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 25);
+            this.button2.Size = new System.Drawing.Size(75, 27);
             this.button2.TabIndex = 3;
             this.button2.Text = "Students";
-            this.button2.UseVisualStyleBackColor = true;
+            this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button3
             // 
+            this.button3.BackColor = System.Drawing.Color.Ivory;
+            this.button3.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button3.Location = new System.Drawing.Point(252, 27);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 25);
+            this.button3.Size = new System.Drawing.Size(86, 27);
             this.button3.TabIndex = 4;
             this.button3.Text = "Allocations";
-            this.button3.UseVisualStyleBackColor = true;
+            this.button3.UseVisualStyleBackColor = false;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // button4
             // 
+            this.button4.BackColor = System.Drawing.Color.Ivory;
+            this.button4.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button4.Location = new System.Drawing.Point(180, 27);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 25);
+            this.button4.Size = new System.Drawing.Size(75, 27);
             this.button4.TabIndex = 7;
             this.button4.Text = "Teachers";
-            this.button4.UseVisualStyleBackColor = true;
+            this.button4.UseVisualStyleBackColor = false;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(324, 27);
+            this.button5.BackColor = System.Drawing.Color.Ivory;
+            this.button5.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button5.Location = new System.Drawing.Point(334, 27);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(75, 25);
+            this.button5.Size = new System.Drawing.Size(75, 27);
             this.button5.TabIndex = 9;
             this.button5.Text = "Add New";
-            this.button5.UseVisualStyleBackColor = true;
+            this.button5.UseVisualStyleBackColor = false;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // add_New1
             // 
+            this.add_New1.BackColor = System.Drawing.Color.PaleGreen;
             this.add_New1.Location = new System.Drawing.Point(37, 59);
             this.add_New1.Name = "add_New1";
             this.add_New1.Size = new System.Drawing.Size(1001, 489);
             this.add_New1.TabIndex = 10;
+            this.add_New1.Load += new System.EventHandler(this.add_New1_Load);
             // 
             // teachers1
             // 
@@ -613,6 +626,8 @@
             // 
             // allocations1
             // 
+            this.allocations1.BackColor = System.Drawing.Color.PaleGreen;
+            this.allocations1.Cursor = System.Windows.Forms.Cursors.Default;
             this.allocations1.Location = new System.Drawing.Point(37, 58);
             this.allocations1.Name = "allocations1";
             this.allocations1.Size = new System.Drawing.Size(976, 500);
@@ -2996,11 +3011,25 @@
             this.groupAndSortDockPanel1_Container.Size = new System.Drawing.Size(604, 144);
             this.groupAndSortDockPanel1_Container.TabIndex = 0;
             // 
+            // linkLabel1
+            // 
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.linkLabel1.Location = new System.Drawing.Point(958, 9);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(60, 18);
+            this.linkLabel1.TabIndex = 11;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "(Logout)";
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.PaleGreen;
             this.ClientSize = new System.Drawing.Size(1027, 570);
+            this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.add_New1);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.teachers1);
@@ -3010,14 +3039,16 @@
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Main";
-            this.Text = "Main";
+            this.Text = "Namal PAT Management System";
             this.Load += new System.EventHandler(this.Main_Load_1);
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemZoomTrackBar1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemProgressBar1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.designRepositoryItemComboBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.recentlyUsedItemsComboBox1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -3191,5 +3222,6 @@
         private DevExpress.XtraReports.UserDesigner.DesignControlContainer groupAndSortDockPanel1_Container;
         private DevExpress.XtraEditors.Repository.RepositoryItemZoomTrackBar repositoryItemZoomTrackBar1;
         private DevExpress.XtraEditors.Repository.RepositoryItemProgressBar repositoryItemProgressBar1;
+        private System.Windows.Forms.LinkLabel linkLabel1;
     }
 }

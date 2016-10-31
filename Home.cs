@@ -4,8 +4,8 @@ using MySql.Data.MySqlClient;
 using System.Collections.Generic;
 using DevExpress.XtraGrid.Views.Base;
 using System.Data;
-using System.ComponentModel;
 using System.Diagnostics;
+using DevExpress.XtraReports.UI;
 
 namespace SEGP
 {
@@ -43,25 +43,17 @@ namespace SEGP
 
 
         }
-
-        public void read()
-        {
-
-        }
+ 
 
         public Home()
         {
+            
             InitializeComponent();
         }
+ 
 
-        private void button1_Click(object sender, EventArgs e)
+        public void reload()
         {
-            Console.WriteLine("home");
-        }
-
-        private void Home_Load(object sender, EventArgs e)
-        {
-            pat.connect();
             int counter1=0;
             int counter;
             readStudent();
@@ -90,16 +82,13 @@ namespace SEGP
                 counter1++;
             }
         }
-        private void gridControl1_Click(object sender, EventArgs e)
+
+        private void Home_Load(object sender, EventArgs e)
         {
-
+            new  Allocations().connect();
+            reload();
         }
-
-        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-
-        }
-
+ 
        
 
         public class Allocate{
@@ -108,11 +97,7 @@ namespace SEGP
 
         }
 
-        private void gridControl1_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
+    
         
 
         private void Home_Load_1(object sender, EventArgs e)
@@ -170,15 +155,27 @@ namespace SEGP
 
         private void button2_Click(object sender, EventArgs e)
         {
-            DevExpress.XtraGrid.Views.Grid.GridView view = gridControl1.MainView as DevExpress.XtraGrid.Views.Grid.GridView;
-            if (view != null)
+            try
             {
-                view.ExportToPdf("Allocation.pdf");
-                Process pdf = new Process();
-                pdf.StartInfo.FileName = "FoxitReader.exe";
-                pdf.StartInfo.Arguments = "Allocation.pdf";
-                pdf.Start();
+                
+
+                DevExpress.XtraGrid.Views.Grid.GridView view = gridControl1.MainView as DevExpress.XtraGrid.Views.Grid.GridView;
+                if (view != null)
+                {
+                    view.ExportToPdf("Home.pdf");
+           
+                    Process pdf = new Process();
+                    pdf.StartInfo.FileName = "FoxitReader.exe";
+                    pdf.StartInfo.Arguments = "Home.pdf";
+                    pdf.Start();
+                }
+            }
+            catch(Exception a)
+            {
+                MessageBox.Show("Error: "+a);
             }
         }
+
+        
     }
 }
